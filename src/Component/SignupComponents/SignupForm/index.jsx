@@ -45,12 +45,12 @@ const SignupForm = () => {
                     email:user.email,
                     uid:user.uid,
                 }));
-                toast.success("Loged in Successfully")
+                toast.success("Logged in Successfully")
                 setLoading(false);
                 navigate("/profile")
             } catch (error) {
-                console.error("Error signing up:", error.code, error.message);
-                toast.error("Error signing up:", error.message)
+                console.error(error.message);
+                toast.error(error.message);
                 setLoading(false);
             }
         } else {
