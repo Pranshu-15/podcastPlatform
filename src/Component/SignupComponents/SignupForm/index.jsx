@@ -11,20 +11,31 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import FileInput from "../../commonComponents/Input/FileInput";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const SignupForm = () => {
     const [fullName , setFullName] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [confirmPassword,setConfirmPassword] = useState("");
+    const [profilePic,setProfilePic] = useState(null);
     const [loading , setLoading] = useState(false);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const profilePicHandle = (file) => {
+        setProfilePic(file);
+    }
     const handleSubmit = async () => {
         console.log("Handling the submit");
         setLoading(true);
         if (password === confirmPassword && password.length >= 6 && fullName && email ) {
             try {
+                const profilePicRef = ref(storage, `podcasts/${auth.currentUser.uid}/${Date.now()}`);
+                await uploadBytes(profilePicRef, profilePic);
+                const profilePicURL = await getDownloadURL(profilePicRef);
+                console.log("profilePic", profilePicURL);
+                toast.success("Profile Picture Uploaded Successfully");
                 //creating users account
                 const userCredentials = await createUserWithEmailAndPassword(
                     auth,
@@ -38,14 +49,18 @@ const SignupForm = () => {
                     name:fullName,
                     email:user.email,
                     uid:user.uid,
+                    profilePic:profilePicURL
+                    
                 });
                 //Save data in redux action
                 dispatch(setUser({
                     name:fullName,
                     email:user.email,
                     uid:user.uid,
+                    profilePic:profilePicURL
                 }));
                 toast.success("Logged in Successfully")
+                console.log("profilePicURL:", profilePic)
                 setLoading(false);
                 navigate("/profile")
             } catch (error) {
@@ -66,14 +81,16 @@ const SignupForm = () => {
         setEmail("");
         setPassword("");
         setConfirmPassword("")
+        setProfilePic("")
     };
+    
     return(
         
         <>
                 <InputComponent
                 state={fullName} 
                 setState = {setFullName} 
-                placeholder="San Adams" 
+                placeholder="Enter Your Name" 
                 type="text"
                 required={true}
                 />
@@ -100,6 +117,12 @@ const SignupForm = () => {
                 type="password"
                 required={true}
                 />
+                <FileInput
+                accept={"image/*"}
+                id="profile-image-input"
+                text="Upload Profile Picture"
+                fileHandle={profilePicHandle}
+            />
                 <Button 
                 text={loading ? "Loading..." : "Sign me up!!"} 
                 disabled = {loading} 

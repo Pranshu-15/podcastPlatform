@@ -1,6 +1,6 @@
 import React from "react";
 import  "./style.css"
-const InputComponent = ({ type , state , placeholder , setState , required }) => {
+const InputComponent = ({ type , state , placeholder , setState , required}) => {
     return (
         <>
             <input
