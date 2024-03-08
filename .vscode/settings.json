@@ -3,5 +3,8 @@
         "DGOLK",
         "Firestore",
         "Toastify"
+    ],
+    "cSpell.ignoreWords": [
+        "persistor"
     ]
 }

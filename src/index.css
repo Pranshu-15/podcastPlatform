@@ -111,3 +111,6 @@ a{
   text-align: left !important;
   width: 100%;
 }
+.userProfileImage{
+  height: 150px;
+}

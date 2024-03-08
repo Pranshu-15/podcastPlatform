@@ -75,7 +75,7 @@ if (docSnap.exists()) {
                     }}
                 > 
                 <h1 className="podcast-title-heading">{podcast.title}</h1>
-                {podcast.createdBy == auth.currentUser.uid && <Button
+                {podcast.createdBy === auth.currentUser.uid && <Button
                 width = {"12vw"}
                 text={"Create Episode"}
                 onClick={() =>{navigate(`/podcast/${id}/create-episode`)
@@ -85,7 +85,7 @@ if (docSnap.exists()) {
                 </div>
                
                 <div className="banner-wrapper">
-                <img src={podcast.bannerImage} />
+                <img src={podcast.bannerImage} alt="bannerImage" />
                 </div>
                 <p className="podcast-description">
                     {podcast.description}

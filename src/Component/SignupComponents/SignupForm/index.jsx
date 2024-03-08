@@ -31,11 +31,7 @@ const SignupForm = () => {
         setLoading(true);
         if (password === confirmPassword && password.length >= 6 && fullName && email ) {
             try {
-                const profilePicRef = ref(storage, `podcasts/${auth.currentUser.uid}/${Date.now()}`);
-                await uploadBytes(profilePicRef, profilePic);
-                const profilePicURL = await getDownloadURL(profilePicRef);
-                console.log("profilePic", profilePicURL);
-                toast.success("Profile Picture Uploaded Successfully");
+                
                 //creating users account
                 const userCredentials = await createUserWithEmailAndPassword(
                     auth,
@@ -44,6 +40,12 @@ const SignupForm = () => {
                 );
                 const user = userCredentials.user;
                 console.log("user", user);
+                //for Profile pic functionality
+                const profilePicRef = ref(storage, `podcasts/${auth.currentUser.uid}/${Date.now()}`);
+                await uploadBytes(profilePicRef, profilePic);
+                const profilePicURL = await getDownloadURL(profilePicRef);
+                console.log("profilePic", profilePicURL);
+                toast.success("Profile Picture Uploaded Successfully");
                 //Saving Users details
                 await setDoc(doc(db , "users" , user.uid) , {
                     name:fullName,
