@@ -106,12 +106,13 @@ if (docSnap.exists()) {
                 })}
                 </div>
                 :<p>No episodes Found</p>}
+                <p>{`Created by: ${podcast.createdBy}`}</p>
                 </>
                 )}
         </div>
         {playingFile && <AudioPlayer
             audioSrc = {playingFile}
-            image = {podcast.displayImage}
+            image = {id.name}
         />}
         
         </>
