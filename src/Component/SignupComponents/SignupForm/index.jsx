@@ -4,7 +4,6 @@ import Button from "../../commonComponents/Button";
 import {auth , db , storage} from "../../../firebase"
 import {
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
@@ -29,7 +28,7 @@ const SignupForm = () => {
     const handleSubmit = async () => {
         console.log("Handling the submit");
         setLoading(true);
-        if (password === confirmPassword && password.length >= 6 && fullName && email ) {
+        if (password === confirmPassword && password.length >= 6 && fullName && email && profilePic) {
             try {
                 
                 //creating users account

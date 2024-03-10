@@ -62,6 +62,7 @@ const App = () => {
           <Route path='/create-a-podcast' element={<CreateAPodcastPage />} />
           <Route path='/podcasts' element={<PodcastsPage/>} />
           <Route path='/podcasts/podcast/:id' element={<PodcastDetailsPage />} />
+          <Route path='/profile/podcast/:id' element={<PodcastDetailsPage />} />
           <Route path='/podcast/:id/create-episode' element={<CreateAnEpisodePage />} />
           </Route>
         </Routes>

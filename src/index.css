@@ -114,3 +114,10 @@ a{
 .userProfileImage{
   height: 150px;
 }
+.profile-podcast{
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
