@@ -32,9 +32,12 @@ const AudioPlayer = ({ audioSrc, image }) => {
         audioRef.current.volume = e.target.value;
     }
 
+    
     const handleTimeUpdate = () => {
-        setCurrentTime(audioRef.current.currentTime);
-    }
+        if (audioRef.current) {
+            setCurrentTime(audioRef.current.currentTime);
+        }
+    };
     const handleLoadedMetaData = () => {
         setDuration(audioRef.current.duration)
     }
@@ -78,6 +81,9 @@ const AudioPlayer = ({ audioSrc, image }) => {
             setVolume(1)
         }
     }, [isMute])
+    useEffect(() => {
+        setIsPlaying(true); // Reset isPlaying state whenever audioSrc changes
+    }, [audioSrc]);
 
     const skipForward = () => {
         audioRef.current.currentTime += 10;

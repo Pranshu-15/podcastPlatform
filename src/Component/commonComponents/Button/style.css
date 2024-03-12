@@ -18,7 +18,7 @@
     transition: all 0.4s;
 }
 
-@media screen and (min-width: 100px) {
+@media screen and (max-width: 576px) {
     .custom-btn{
         width: 34vw !important;
         font-size: 0.8rem;
