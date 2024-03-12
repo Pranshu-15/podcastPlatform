@@ -17,3 +17,11 @@
     color: var(--theme);
     transition: all 0.4s;
 }
+
+@media screen and (min-width: 100px) {
+    .custom-btn{
+        width: 34vw !important;
+        font-size: 0.8rem;
+    }
+    
+  }

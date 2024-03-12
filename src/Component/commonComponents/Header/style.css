@@ -34,3 +34,35 @@
 .active{
     color: var(--white) !important;
 }
+.mobile-drawer{
+    display: none;
+}
+@media only screen and (max-width: 800px) {
+   .links{
+    display: none;
+   }
+   .navbar{
+    padding: 1.5rem;
+    justify-content: flex-start;
+   }
+   .active{
+    font-size: 1rem;
+   }
+   .mobile-drawer{
+    display: flex;
+   }
+   .drawer-menu{
+     width: 40vw;
+     background-color: var(--theme);
+     height: 100vh;
+     padding: 1.5rem;
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+   }
+   a{
+    margin: 10px;
+  padding: 6px;
+  text-align: center;
+   }
+  }

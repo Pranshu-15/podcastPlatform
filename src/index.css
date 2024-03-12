@@ -132,3 +132,13 @@ a{
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (min-width: 100px) {
+  .podcast-title-heading{
+    font-size: 1.1rem;
+  line-height: 1.1;
+  letter-spacing: 0em;
+  font-style: normal;
+  width: 38vw;
+  }
+}

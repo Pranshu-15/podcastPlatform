@@ -16,6 +16,25 @@ const PodcastDetailsPage = () => {
     const navigate = useNavigate();
     const [playingFile , setPlayingFile] = useState("")
     console.log("ID" , id); 
+    const getData = async () => {
+        try{
+            const docRef = doc(db, "podcasts", id);
+const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data());
+  setPodcast({id:id, ...docSnap.data() });
+  console.log(podcast);
+} else {
+  // docSnap.data() will be undefined in this case
+  console.log("No such Podcast!");
+  toast.error("No such Podcast!");
+  navigate("/podcasts")
+}
+        }catch(e) {
+            toast.error(e.message);
+        }
+    }
     useEffect(() => {
         if(id){
             getData();
@@ -42,25 +61,7 @@ const PodcastDetailsPage = () => {
     }, [id])
 
 
-    const getData = async () => {
-        try{
-            const docRef = doc(db, "podcasts", id);
-const docSnap = await getDoc(docRef);
-
-if (docSnap.exists()) {
-  console.log("Document data:", docSnap.data());
-  setPodcast({id:id, ...docSnap.data() });
-  console.log(podcast);
-} else {
-  // docSnap.data() will be undefined in this case
-  console.log("No such Podcast!");
-  toast.error("No such Podcast!");
-  navigate("/podcasts")
-}
-        }catch(e) {
-            toast.error(e.message);
-        }
-    }
+    
     return(
         <>
         <Header />
@@ -75,7 +76,7 @@ if (docSnap.exists()) {
                     }}
                 > 
                 <h1 className="podcast-title-heading">{podcast.title}</h1>
-                {podcast.createdBy == auth.currentUser.uid && <Button
+                {podcast.createdBy === auth.currentUser.uid && <Button
                 width = {"12vw"}
                 text={"Create Episode"}
                 onClick={() =>{navigate(`/podcast/${id}/create-episode`)

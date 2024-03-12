@@ -70,7 +70,7 @@ const ProfilePage = () => {
         <Header/>
         <div className="input-wrapper">
         <h1>Profile</h1>
-            <img className="userProfileImage" src={user.profilePic} alt="Profile" />
+            <img className="userProfileImage" src={user.profilePic} alt="ProfileImage" />
             <div><h1>Hello {user.name}</h1></div>
             {userPodcasts.length > 0 ?(
                     <>

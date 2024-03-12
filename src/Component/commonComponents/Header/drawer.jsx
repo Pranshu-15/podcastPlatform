@@ -1,17 +1,19 @@
-import React   from "react";
-import "./style.css";
+import { useState } from "react";
+import Drawer from "@mui/material/Drawer";
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import { IconButton } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import TemporaryDrawer from "./drawer";
-const Header = () => {
+
+export default function TemporaryDrawer() {
+    const [open, setOpen] = useState(false);
     const location = useLocation();
     const currentPath = location.pathname;
-  
     return (
-        <>
-            <div className="navbar">
-                <div className="gradientContainer"></div>
-                <div className="links">
-                    <Link to="/" className={currentPath === '/' ? 'active' : ""}>
+        <div>
+            <IconButton onClick={() => setOpen(true)}><MenuRoundedIcon className="link" /></IconButton>
+            <Drawer anchor={"left"} open={open} onClose={() => setOpen(false)}>
+            <div className="drawer-menu">
+            <Link to="/" className={currentPath === '/' ? 'active' : ""}>
                         SignUp
                     </Link>
                     <Link to="/podcasts" className={currentPath === '/podcasts' ? 'active' : ""}>
@@ -24,9 +26,7 @@ const Header = () => {
                         Profile
                     </Link>
                 </div>
-                <div className="mobile-drawer"><TemporaryDrawer/></div>
-            </div>
-        </>
-    )
+            </Drawer>
+        </div>
+    );
 }
-export default Header;
