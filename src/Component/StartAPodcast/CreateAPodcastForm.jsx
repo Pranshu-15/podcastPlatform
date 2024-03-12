@@ -7,11 +7,11 @@ import Button from "../commonComponents/Button";
 import FileInput from "../commonComponents/Input/FileInput";
 import { auth, db, storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import "./style.css";
 
 const CreateAPodcastForm = () => {
-    const { id } = useParams();
+    // const { id } = useParams();
     const [selectedGenre, setSelectedGenre] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState();
