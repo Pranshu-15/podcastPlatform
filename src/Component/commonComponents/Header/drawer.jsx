@@ -10,7 +10,7 @@ export default function TemporaryDrawer() {
     const currentPath = location.pathname;
     return (
         <div>
-            <IconButton onClick={() => setOpen(true)}><MenuRoundedIcon className="link" /></IconButton>
+            <IconButton onClick={() => setOpen(true)} style={{ color: 'white' }}><MenuRoundedIcon className="link" /></IconButton>
             <Drawer anchor={"left"} open={open} onClose={() => setOpen(false)}>
             <div className="drawer-menu">
             <Link to="/" className={currentPath === '/' ? 'active' : ""}>

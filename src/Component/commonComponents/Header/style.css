@@ -64,5 +64,15 @@
     margin: 10px;
   padding: 6px;
   text-align: center;
+  color: #8ea6bb;
    }
+   /* .links a{
+    text-decoration: none;
+    font-weight: 500;
+
+} */
+ a:hover{
+    color: var(--white);
+    transition: all0.3s;
+}
   }

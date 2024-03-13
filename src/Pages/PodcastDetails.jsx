@@ -111,10 +111,6 @@ if (docSnap.exists()) {
                 </>
                 )}
         </div>
-        {/* {playingFile && <AudioPlayer
-            audioSrc = {playingFile}
-            image = {id.name}
-        />} */}
         {playingFile && <AudioPlayer
     key={playingFile} // Add key prop here
     audioSrc={playingFile}
