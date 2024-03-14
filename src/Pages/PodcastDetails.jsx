@@ -10,6 +10,7 @@ import AudioPlayer from "../Component/Podcasts/AudioPlayer";
 
 
 const PodcastDetailsPage = () => {
+    
     const {id} = useParams();
     const [podcast , setPodcast] = useState({});
     const [episodes, setEpisodes] = useState([]);

@@ -12,65 +12,68 @@ import "./style.css";
 
 const CreateAPodcastForm = () => {
     // const { id } = useParams();
-    const [selectedGenre, setSelectedGenre] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState();
     const [displayImage, setDisplayImage] = useState();
     const [bannerImage, setBannerImage] = useState("");
     const [loading, setLoading] = useState(false);
+    const [genre, setGenre] = useState(""); // New state for genre
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const genres = [
+    const musicGenres = [
         "Pop",
         "Rock",
-        "Hip Hop",
-        "R&B",
-        "Country",
         "Jazz",
-        "Classical",
-        "Electronic",
-        "Reggae",
         "Blues",
-        "Folk",
-        "Heavy Metal",
-        "Punk",
-        "Indie",
-        "Funk",
-        "Soul",
-        "Gospel",
-        "EDM",
-        "Alternative",
-        "Latin",
-        "World",
+        "Classical",
+        "Hip Hop",
         "Rap",
-        "Techno",
-        "Disco",
-        "House",
-        "Dubstep",
-        "Trance",
-        "Ska",
-        "Trap",
-        "Grime",
+        "Country",
+        "Electronic",
+        "Folk",
+        "Reggae",
+        "R&B (Rhythm and Blues)",
+        "Metal",
+        "Punk",
+        "Funk",
+        "Gospel",
+        "Soul",
+        "Alternative",
+        "Indie",
+        "Dance",
+        "EDM (Electronic Dance Music)",
         "Ambient",
-        "Chillout",
-        "Instrumental",
-        "Acoustic",
+        "World",
         "Experimental",
+        "Ska",
+        "Dubstep",
+        "Techno",
+        "House",
+        "Trance",
+        "Grunge",
+        "Industrial",
+        "Psychedelic",
+        "Disco",
+        "Garage Rock",
         "Reggaeton",
+        "Mariachi",
+        "Bluegrass",
+        "Flamenco",
+        "Celtic",
+        "Opera",
+        "Baroque",
         "Salsa",
         "Merengue",
-        "Bachata",
-        "Cumbia",
         "Tango",
-        "Mariachi",
-        "Flamenco",
-        "Samba",
+        "K-Pop (Korean Pop)",
+        "J-Pop (Japanese Pop)",
         "Bossa Nova",
-        "African",
-        "Asian",
-        "Indian",
-        "Middle Eastern",
+        "Afrobeat",
+        "Soca",
+        "Zydeco"
     ];
+    
+    
     const handlePodcastCreation = async () => {
         toast.success("Handling Form");
         if (title && description && displayImage && bannerImage) {
@@ -93,6 +96,7 @@ const CreateAPodcastForm = () => {
                     description: description,
                     bannerImage: bannerImageURL,
                     displayImage: displayImageURL,
+                    genre: genre, // Include genre in podcast data
                     createdBy: auth.currentUser.uid,
                 };
                 const docRef = await addDoc(collection(db, "podcasts"), podcastData);
@@ -122,9 +126,7 @@ const CreateAPodcastForm = () => {
     }
 
       
-        const handleGenreChange = (event) => {
-          setSelectedGenre(event.target.value);
-        };
+       
 
         return (
             <>
@@ -154,19 +156,16 @@ const CreateAPodcastForm = () => {
                     text="Upload Banner Image"
                     fileHandle={bannerImageHandle}
                 />
+                 <select value={genre} onChange={(e) => setGenre(e.target.value)}>
+                <option value="">Select Genre</option>
+                {musicGenres.map((genre) => (
+                    <option key={genre} value={genre}>
+                        {genre}
+                    </option>
+                ))}
+            </select>
 
-                <div className="custom-input">
-                    <label htmlFor="genre">Choose a music genre:</label>
-                    <select id="genre" value={selectedGenre} onChange={handleGenreChange}>
-                        <option value="">Select genre</option>
-                        {genres.map((genre) => (
-                            <option key={genre} value={genre}>
-                                {genre}
-                            </option>
-                        ))}
-                    </select>
-                    <p>Selected genre: {selectedGenre}</p>
-                </div>
+                
                 <Button
                     text={loading ? "Loading..." : "Create A Podcast"}
                     disabled={loading}
