@@ -76,6 +76,9 @@ const SignupForm = () => {
             else if(password.length<5){
                 toast.error("Password length should be minimum 6 char");
             }
+            else{
+                toast.error("Please fill all the fields!!")
+            }
             setLoading(false);
         }
         setFullName("");
