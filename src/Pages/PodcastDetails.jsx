@@ -16,6 +16,7 @@ const PodcastDetailsPage = () => {
     const [episodes, setEpisodes] = useState([]);
     const navigate = useNavigate();
     const [playingFile , setPlayingFile] = useState("")
+    const [user, setUser] = useState(null); // State to store user data
     console.log("ID" , id); 
     const getData = async () => {
         try{
@@ -61,7 +62,27 @@ if (docSnap.exists()) {
         };
     }, [id])
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const userRef = doc(db, "users", podcast.createdBy); // Assuming users are stored in a collection named "users"
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    setUser(userSnap.data());
+                } else {
+                    console.log("No such user!");
+                    setUser(null);
+                }
+            } catch (error) {
+                console.log("Error fetching user data:", error);
+                setUser(null);
+            }
+        };
 
+        if (podcast.createdBy) {
+            fetchUserData();
+        }
+    }, [podcast.createdBy]);
     
     return(
         <>
@@ -108,7 +129,7 @@ if (docSnap.exists()) {
                 })}
                 </div>
                 :<p>No episodes Found</p>}
-                <p>{`Created by: ${podcast.createdBy}`}</p>
+                {user && <p>{`Created by: ${user.name}`}</p>}
                 </>
                 )}
         </div>
