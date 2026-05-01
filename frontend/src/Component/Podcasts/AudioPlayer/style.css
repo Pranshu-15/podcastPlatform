@@ -1,0 +1,344 @@
+/* ── Base Container ── */
+.ap-bar {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    height: 85px;
+    background-color: rgba(11, 12, 16, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+/* Accent Glow Line */
+.ap-glow-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--accent-muted) 15%, 
+        var(--accent) 50%, 
+        var(--accent-muted) 85%, 
+        transparent 100%
+    );
+    box-shadow: 0 0 10px var(--accent);
+    opacity: 0.8;
+}
+
+/* ── LEFT: Track Info ── */
+.ap-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0; /* allows child text-overflow to work */
+}
+
+.ap-artwork-wrapper {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.ap-artwork {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Spinning ring when playing */
+.ap-artwork-ring {
+    position: absolute;
+    inset: -2px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.ap-artwork-spinning {
+    border-top-color: var(--accent);
+    border-bottom-color: var(--accent-muted);
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.ap-track-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.ap-track-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.ap-track-podcast {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── CENTER: Controls & Progress ── */
+.ap-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.ap-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.ap-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.ap-btn:hover {
+    color: var(--white);
+}
+
+.ap-btn-skip {
+    width: 24px;
+    height: 24px;
+    color: var(--text-secondary);
+}
+
+.ap-btn-skip:hover {
+    color: var(--accent);
+    transform: scale(1.1);
+}
+
+.ap-btn-play {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--theme);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.ap-btn-play svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 2px; /* optical alignment for play triangle */
+}
+
+.ap-playing svg {
+    margin-left: 0; /* reset alignment for pause bars */
+}
+
+.ap-btn-play:hover {
+    transform: scale(1.08);
+    background: var(--accent);
+    box-shadow: 0 6px 20px rgba(102, 252, 241, 0.4);
+}
+
+/* Progress Row */
+.ap-progress-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0.8rem;
+}
+
+.ap-time {
+    font-size: 0.7rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-secondary);
+    min-width: 38px;
+}
+
+.ap-time:first-child { text-align: right; }
+.ap-time:last-child { text-align: left; }
+
+/* Custom Progress Bar */
+.ap-progress-track {
+    flex: 1;
+    height: 12px; /* larger hit area */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.ap-progress-track::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.ap-progress-fill {
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+    position: relative;
+    pointer-events: none;
+    box-shadow: 0 0 8px rgba(102, 252, 241, 0.5);
+}
+
+.ap-progress-thumb {
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 12px;
+    height: 12px;
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ap-progress-track:hover .ap-progress-thumb {
+    transform: translateY(-50%) scale(1);
+}
+
+/* ── RIGHT: Volume ── */
+.ap-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+}
+
+.ap-btn-vol {
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+}
+
+.ap-btn-vol:hover {
+    color: var(--accent);
+}
+
+.ap-vol-track {
+    width: 80px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.ap-vol-slider {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+    margin: 0;
+}
+
+.ap-vol-track::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.ap-vol-fill {
+    height: 4px;
+    background: var(--white);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.ap-vol-track:hover .ap-vol-fill {
+    background: var(--accent);
+}
+
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .ap-bar {
+        height: auto;
+        padding: 1rem 1.2rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 1rem;
+    }
+
+    .ap-left {
+        grid-row: 1;
+        justify-content: flex-start;
+    }
+
+    .ap-right {
+        display: none; /* Hide volume on mobile to save space */
+    }
+
+    .ap-center {
+        grid-row: 2;
+        max-width: 100%;
+    }
+
+    /* Position play controls absolutely on mobile next to title */
+    .ap-controls {
+        position: absolute;
+        top: 1rem;
+        right: 1.2rem;
+        margin: 0;
+    }
+    
+    .ap-btn-skip {
+        display: none; /* Only show play/pause on mobile header */
+    }
+
+    .ap-progress-row {
+        width: 100%;
+    }
+}

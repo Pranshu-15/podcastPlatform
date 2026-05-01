@@ -1,0 +1,134 @@
+/* ── Ambient Blobs ── */
+.create-ep-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+    animation: float 12s ease-in-out infinite alternate;
+}
+.blob-ep-a {
+    width: 420px; height: 420px;
+    background: rgba(102, 252, 241, 0.07);
+    top: -60px; left: -120px;
+}
+.blob-ep-b {
+    width: 350px; height: 350px;
+    background: rgba(69, 162, 158, 0.09);
+    bottom: 8%; right: -80px;
+    animation-delay: -5s;
+}
+
+/* ── Page Layout ── */
+.create-ep-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3vh 1.5rem 5rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* ── Card ── */
+.create-ep-card {
+    width: 100%;
+    max-width: 600px;
+    padding: 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.create-ep-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(102,252,241,0.06) 0%, transparent 55%);
+    pointer-events: none;
+}
+
+/* ── Card Header ── */
+.create-ep-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.create-ep-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 12px rgba(102, 252, 241, 0.4));
+}
+
+.create-ep-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    margin: 0 0 0.2rem;
+    text-shadow: 0 0 30px rgba(102, 252, 241, 0.2);
+}
+
+.create-ep-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    cursor: default;
+}
+
+.create-ep-subtitle:hover {
+    color: var(--text-secondary);
+    text-shadow: none;
+}
+
+/* ── Form Layout ── */
+.create-ep-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+/* ── File Hint ── */
+.file-hint {
+    font-size: 0.78rem;
+    color: var(--accent-muted);
+    margin: 0.3rem 0 0 0.2rem;
+    cursor: default;
+}
+
+.file-hint:hover {
+    color: var(--accent-muted);
+    text-shadow: none;
+}
+
+/* ── Actions ── */
+.create-ep-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .create-ep-card {
+        padding: 1.8rem 1.5rem;
+    }
+
+    .create-ep-title {
+        font-size: 1.4rem;
+    }
+
+    .create-ep-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .cancel-btn {
+        text-align: center;
+    }
+}

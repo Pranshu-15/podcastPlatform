@@ -1,0 +1,105 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  align-items: center;
+}
+
+.links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  position: relative;
+  transition: color 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.links a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -6px;
+  left: 0;
+  background: var(--accent);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.links a:hover,
+.links a.active {
+  color: var(--white);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.links a:hover::after,
+.links a.active::after {
+  width: 100%;
+}
+
+.mobile-drawer {
+  display: none;
+}
+
+/* MUI Drawer Overrides */
+.MuiDrawer-paper {
+  background: rgba(11, 12, 16, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  border-right: 1px solid var(--glass-border) !important;
+  width: 250px !important;
+}
+
+/* Drawer Menu Links */
+.drawer-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.drawer-menu a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.drawer-menu a:hover,
+.drawer-menu a.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  transform: translateX(5px);
+}
+
+@media only screen and (max-width: 800px) {
+  .links {
+    display: none;
+  }
+  .navbar {
+    justify-content: space-between;
+    padding: 1.5rem;
+  }
+  .mobile-drawer {
+    display: flex;
+  }
+}

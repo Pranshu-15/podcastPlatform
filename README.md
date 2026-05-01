@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+<div align="center">
+  
+# 🎙️ Podcast Platform
+**A modern, full-stack web application for creators to host, manage, and share their audio content.**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)](https://www.mongodb.com/mern-stack)
+[![React](https://img.shields.io/badge/Frontend-React.js-61DAFB.svg)](https://reactjs.org/)
+[![Node](https://img.shields.io/badge/Backend-Node.js-339933.svg)](https://nodejs.org/)
+[![Cloudinary](https://img.shields.io/badge/Storage-Cloudinary-3448C5.svg)](https://cloudinary.com/)
 
-## Available Scripts
+</div>
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🌟 Overview
+The **Podcast Platform** is a premium MERN stack application designed to give audio creators a seamless experience. Built from the ground up with a stunning, high-performance **Glassmorphism UI**, the platform allows users to create accounts, upload podcasts, publish audio episodes, and listen seamlessly via a persistent, globally-synchronized custom audio player.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ✨ Key Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🎧 For Listeners
+- **Persistent Global Audio Player:** A custom-built, fixed audio player that stays with you as you navigate between pages. Features custom seek bars, volume controls, spinning artwork, and synchronized play/pause states.
+- **Dynamic Browsing:** Browse a catalog of community-created podcasts sorted by genre.
+- **Smooth Animations:** Powered by **GSAP**, lists and pages load with elegant stagger and fade-in animations.
+- **Responsive Design:** A fully mobile-optimized experience with responsive hamburger navigation and smart layouts that adapt to your screen size.
 
-### `npm test`
+### 🎙️ For Creators
+- **Secure Authentication:** JWT-based authentication system with encrypted passwords via bcrypt.
+- **Podcast Management:** Create new podcast series with dedicated Display Images and ultra-wide Banner Images.
+- **Episode Publishing:** Upload `.mp3` audio files directly to your podcast.
+- **Media Hosting:** Fully integrated with **Cloudinary** for lightning-fast, highly-optimized image and audio streaming.
+- **Creator Dashboard:** A personalized profile page tracking your total podcasts, episodes, and platform tenure.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠️ Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend (Client)
+- **React.js 18** - UI Library
+- **Redux Toolkit** - Global State Management (User Authentication & Podcast Caching)
+- **React Router Dom v6** - Dynamic Client-Side Routing
+- **GSAP (GreenSock)** - High-performance UI Animations
+- **Axios** - Promise-based HTTP client with Axios Interceptors for JWT attachment
+- **Pure Vanilla CSS** - Custom design system implementing a dark-theme glassmorphism aesthetic (no UI libraries).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Backend (Server)
+- **Node.js & Express.js** - RESTful API Architecture
+- **MongoDB & Mongoose** - NoSQL Database and Object Data Modeling
+- **JSON Web Tokens (JWT)** - Secure route protection and authorization
+- **Bcrypt.js** - Secure password hashing
+- **Multer & Stream.PassThrough** - Memory-storage file handling for direct-to-cloud streams
+- **Cloudinary SDK** - Cloud storage provider for Images and Audio Files
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🚀 Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed along with a MongoDB database (e.g., MongoDB Atlas) and a Cloudinary account.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1. Clone the repository
+```bash
+git clone https://github.com/yourusername/podcast-platform.git
+cd podcast-platform
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. Backend Setup
+Navigate to the backend directory, install dependencies, and configure your environment variables.
+```bash
+cd backend
+npm install
+```
+Create a `.env` file in the `backend/` directory:
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_jwt_key
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+```
+Start the backend server:
+```bash
+npm run dev
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3. Frontend Setup
+Open a new terminal, navigate to the frontend directory, install dependencies, and start the app.
+```bash
+cd frontend
+npm install
+```
+Create a `.env.local` file in the `frontend/` directory (Optional, for deployment):
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+```
+Start the React application:
+```bash
+npm start
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📐 Architecture Highlights
+- **Auth-Aware Navigation:** The header dynamically updates to hide/show authentication options based on the user's active session state in Redux.
+- **Lifted State Synchronization:** The audio playback state (`isPlaying`) is lifted to the parent components to ensure that clicking "Play" on a specific episode card instantly reflects the correct playing/paused icon inside the global fixed bottom player.
+- **CSS Variables & Tokens:** The entire application's aesthetic is controlled via a centralized CSS variable system in `index.css`, making themes easily modifiable.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<div align="center">
+  <p>Built with ❤️ using the MERN Stack</p>
+</div>
